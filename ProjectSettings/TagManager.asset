@@ -7,6 +7,9 @@ TagManager:
   - Lever
   - pushable
   - boundChecker
+  - enemy
+  - walls
+  - glitch
   layers:
   - Default
   - TransparentFX
@@ -46,4 +49,7 @@ TagManager:
     locked: 0
   - name: Props
     uniqueID: 913543009
+    locked: 0
+  - name: Glitch
+    uniqueID: 558790693
     locked: 0

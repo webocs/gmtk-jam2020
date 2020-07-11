@@ -4,42 +4,60 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : BlockingObject
 {
     public AudioClip moveSound;
-    public float moveSpeed;
-    public BoundaryChecker rightBoundaryChecker;
-    public BoundaryChecker leftBoundaryChecker;
-    public BoundaryChecker topBoundaryChecker;
-    public BoundaryChecker bottomBoundaryChecker;
     [Min(1)]
     public float MIN_MOVE_TIMER;
     [Min(1)]
     public float MAX_MOVE_TIMER;
+    [Min(1)]
+    public float MIN_ATTACK_TIMER;
+    [Min(1)]
+    public float MAX_ATTACK_TIMER;
+    public bool isMoving;
 
 
     private float newMoveTimer;
+    private float attackTimer;
     const int UPPER_BOUNDARY = 100;
     const int RIGHT_BOUNDARY = 100;
-    private bool isMoving;
-    private Animator animator;
     private bool goingRight;
     private float oldMoveSpeed; // Used to slow down the player when pushing a heavy object
 
     // Start is called before the first frame update
     void Awake()
     {
+        CanBePushed = false;
+        CanBeTraversed = false;       
         goingRight = true;
-        animator = GetComponentInChildren<Animator>();
         oldMoveSpeed = -1;
         MAX_MOVE_TIMER = Math.Max(MIN_MOVE_TIMER, MAX_MOVE_TIMER);
         MIN_MOVE_TIMER = Math.Min(MIN_MOVE_TIMER, MAX_MOVE_TIMER);
+        MIN_ATTACK_TIMER = Math.Max(MIN_MOVE_TIMER, MAX_MOVE_TIMER);
+        MAX_ATTACK_TIMER = Math.Min(MIN_MOVE_TIMER, MAX_MOVE_TIMER);
         newMoveTimer = UnityEngine.Random.Range(MIN_MOVE_TIMER, MAX_MOVE_TIMER);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!isMoving  && attackTimer <0)
+        {
+            if (isSensingPlayer())
+            {
+                attack();
+                attackTimer = UnityEngine.Random.Range(MIN_ATTACK_TIMER, MAX_ATTACK_TIMER);
+            }
+        }
+        else if (!isMoving)
+        {
+            attackTimer -= Time.deltaTime;
+        }
+        else
+        {
+            attackTimer = UnityEngine.Random.Range(MIN_ATTACK_TIMER, MAX_ATTACK_TIMER);
+        }
         if (newMoveTimer < 0)
         {
             checkMovement();
@@ -49,6 +67,12 @@ public class EnemyController : MonoBehaviour
         {
             newMoveTimer -= Time.deltaTime;
         }
+    }
+
+    void attack()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.GetComponent<PlayerController>().hurt();
     }
 
     void checkMovement()
@@ -70,7 +94,6 @@ public class EnemyController : MonoBehaviour
                 move(Vector2.left);
                 if (goingRight)
                 {
-                    animator.SetTrigger("goLeft");
                     goingRight = false;
                 }
 
@@ -80,7 +103,6 @@ public class EnemyController : MonoBehaviour
                 move(Vector2.right);
                 if (!goingRight)
                 {
-                    animator.SetTrigger("goRight");
                     goingRight = true;
                 }
 
@@ -95,7 +117,7 @@ public class EnemyController : MonoBehaviour
 
     private int getNextMovement()
     {
-        return UnityEngine.Random.Range(0, 3);
+        return UnityEngine.Random.Range(0, 4);
     }
 
     void move(Vector2 direction)
@@ -174,6 +196,15 @@ public class EnemyController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+    }
+
+    private bool isSensingPlayer()
+    {
+        return
+            (leftBoundaryChecker.collidingWith && leftBoundaryChecker.collidingWith.tag == "Player") ||
+            (rightBoundaryChecker.collidingWith && rightBoundaryChecker.collidingWith.tag == "Player") ||
+            (topBoundaryChecker.collidingWith && topBoundaryChecker.collidingWith.tag == "Player") ||
+            (bottomBoundaryChecker.collidingWith && bottomBoundaryChecker.collidingWith.tag == "Player");
     }
 
     IEnumerator smoothTranslate(Vector2 direction)

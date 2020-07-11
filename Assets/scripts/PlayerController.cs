@@ -92,6 +92,11 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    internal void hurt()
+    {
+        Destroy(gameObject);
+    }
+
     void movePlayer(Vector2 direction)    {
       
         bool canMove = false;
