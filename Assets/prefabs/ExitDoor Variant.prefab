@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5177159346241078272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5321549417887827727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f648da211cc57f408f14a635eef356d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fader: {fileID: 0}
+--- !u!1001 &6604353966091653911
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1332663003164517303, guid: 78f324ec8ea5c1047ae37af606c11f2c,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -5518181693598719635, guid: 97f33f9a62bb3d943a3e8f79907d5f38,
+        type: 3}
+    - target: {fileID: 1332663003554894871, guid: 78f324ec8ea5c1047ae37af606c11f2c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1332663003554894871, guid: 78f324ec8ea5c1047ae37af606c11f2c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1332663003554894871, guid: 78f324ec8ea5c1047ae37af606c11f2c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1332663003554894871, guid: 78f324ec8ea5c1047ae37af606c11f2c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1332663003554894871, guid: 78f324ec8ea5c1047ae37af606c11f2c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1332663003554894871, guid: 78f324ec8ea5c1047ae37af606c11f2c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1332663003554894871, guid: 78f324ec8ea5c1047ae37af606c11f2c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1332663003554894871, guid: 78f324ec8ea5c1047ae37af606c11f2c,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1332663003554894871, guid: 78f324ec8ea5c1047ae37af606c11f2c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1332663003554894871, guid: 78f324ec8ea5c1047ae37af606c11f2c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1332663003554894871, guid: 78f324ec8ea5c1047ae37af606c11f2c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1332663003554894872, guid: 78f324ec8ea5c1047ae37af606c11f2c,
+        type: 3}
+      propertyPath: m_Name
+      value: ExitDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 1332663003852359723, guid: 78f324ec8ea5c1047ae37af606c11f2c,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -8988841064112171832, guid: 97f33f9a62bb3d943a3e8f79907d5f38,
+        type: 3}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 78f324ec8ea5c1047ae37af606c11f2c, type: 3}
+--- !u!1 &5321549417887827727 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1332663003554894872, guid: 78f324ec8ea5c1047ae37af606c11f2c,
+    type: 3}
+  m_PrefabInstance: {fileID: 6604353966091653911}
+  m_PrefabAsset: {fileID: 0}

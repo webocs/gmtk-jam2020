@@ -10,6 +10,7 @@ TagManager:
   - enemy
   - walls
   - glitch
+  - undestroyable
   layers:
   - Default
   - TransparentFX
@@ -20,8 +21,8 @@ TagManager:
   - 
   - 
   - walls
-  - 
-  - 
+  - boundCheckers
+  - cheatMaster
   - 
   - 
   - 
@@ -47,9 +48,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Walls
+    uniqueID: 1733596153
+    locked: 0
   - name: Props
     uniqueID: 913543009
     locked: 0
+  - name: Enemies
+    uniqueID: 76807903
+    locked: 0
   - name: Glitch
     uniqueID: 558790693
+    locked: 0
+  - name: Pointer
+    uniqueID: 4291815311
     locked: 0

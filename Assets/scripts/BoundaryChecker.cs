@@ -14,7 +14,7 @@ public class BoundaryChecker : MonoBehaviour
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.tag != "boundChecker")
+        if (collision.gameObject.tag != "boundChecker" && collision.gameObject.tag != "undestroyable")
         {
             IsColliding = true;
             collidingWith = collision.gameObject;

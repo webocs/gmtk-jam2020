@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1332663003164517305}
   - component: {fileID: 1332663003164517303}
-  - component: {fileID: 1332663003164517304}
   m_Layer: 0
   m_Name: doorOpen
   m_TagString: Untagged
@@ -30,7 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1332663003554894871}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1332663003164517303
 SpriteRenderer:
@@ -69,7 +68,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 913543009
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 264268553633252430, guid: 654845cc1aa1a8f49abfc53d92087da4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -82,19 +81,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1332663003164517304
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1332663003164517306}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1a7ca9b663364045ac6990aa26f04ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  status: 0
 --- !u!1 &1332663003554894872
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,8 +110,8 @@ Transform:
   m_LocalPosition: {x: 7, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1332663003164517305}
   - {fileID: 1332663003852359724}
+  - {fileID: 1332663003164517305}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -141,7 +127,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1a7ca9b663364045ac6990aa26f04ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 0
+  rightBoundaryChecker: {fileID: 0}
+  leftBoundaryChecker: {fileID: 0}
+  topBoundaryChecker: {fileID: 0}
+  bottomBoundaryChecker: {fileID: 0}
+  isMoving: 0
+  connectedTo: {fileID: 0}
+  c1: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  c2: {r: 1, g: 0, b: 0, a: 1}
+  origin: {x: 0, y: 0, z: 0}
+  end: {fileID: 0}
+  offSetVector: {x: 0, y: 0, z: 0}
+  width: 0
   status: 0
+  toggleSound: {fileID: 8300000, guid: fab604fc4bac041448c71e276526eac6, type: 3}
 --- !u!61 &1332663003554894869
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -197,7 +197,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1332663003554894871}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1332663003852359723
 SpriteRenderer:
@@ -236,7 +236,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 913543009
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 1126334381999934561, guid: 654845cc1aa1a8f49abfc53d92087da4,
     type: 3}

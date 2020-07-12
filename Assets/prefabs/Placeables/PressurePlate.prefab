@@ -46,6 +46,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3adeaf39ba37e234bb853b7d2ea876b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 0
+  rightBoundaryChecker: {fileID: 0}
+  leftBoundaryChecker: {fileID: 0}
+  topBoundaryChecker: {fileID: 0}
+  bottomBoundaryChecker: {fileID: 0}
+  isMoving: 0
   status: 0
   connectedTo: {fileID: 0}
 --- !u!61 &1153881091828689452

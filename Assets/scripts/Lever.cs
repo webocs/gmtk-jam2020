@@ -5,7 +5,6 @@ using UnityEngine;
 public class Lever : Activatable
 {
     public bool status;
-    public Activatable connectedTo;
 
     GameObject onChild;
     GameObject offChild;
@@ -26,7 +25,11 @@ public class Lever : Activatable
     public void toggle()
     {
         status = !status;
-        if (connectedTo) connectedTo.activate(gameObject);
+        if (connectedTo)
+        {
+            IEnumerator co = smoothActivate();
+            StartCoroutine(co);
+        }
     }
 
     public override void activate(GameObject activator)
@@ -37,5 +40,12 @@ public class Lever : Activatable
     public override void setStatus(GameObject activator, bool status)
     {
         this.status = status;
+    }
+
+    IEnumerator smoothActivate()
+    {
+        yield return new WaitForSeconds(0.2f);
+        connectedTo.activate(gameObject);
+        yield return null;
     }
 }

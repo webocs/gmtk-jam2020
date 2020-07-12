@@ -130,9 +130,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: fadeIn
     m_EventTreshold: 0
-  - m_ConditionMode: 1
-    m_ConditionEvent: fadeIn
-    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8875861640355226232}
   m_Solo: 0

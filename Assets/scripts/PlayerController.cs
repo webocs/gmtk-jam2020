@@ -2,40 +2,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     public AudioClip moveSound;
+    public AudioClip dieSound;
     public float moveSpeed;
     public BoundaryChecker rightBoundaryChecker;
     public BoundaryChecker leftBoundaryChecker;
     public BoundaryChecker topBoundaryChecker;
     public BoundaryChecker bottomBoundaryChecker;
+    public Fader fader;
 
-    const int UPPER_BOUNDARY = 100;
-    const int RIGHT_BOUNDARY = 100;
+    const int UPPER_BOUNDARY = 16;
+    const int RIGHT_BOUNDARY = 16;
     private bool isMoving;
+    private bool isDead;
     private Animator animator;
     private bool goingRight;
     private float oldMoveSpeed; // Used to slow down the player when pushing a heavy object
 
     // Start is called before the first frame update
     void Awake()
-    {    
+    {
+        isDead = false;
+        fader = FindObjectOfType<Fader>();
         goingRight = true;
         animator = GetComponentInChildren<Animator>();
         oldMoveSpeed = -1;
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         checkMovement();
     }
 
     void checkMovement()
     {
-        if (!isMoving)
+        if (!isMoving && !isDead)
         {
             if (Input.GetKey(KeyCode.W))
             {
@@ -87,14 +93,37 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            // gameManager.restart();
+            reload();
         }
 
     }
 
     internal void hurt()
     {
-        Destroy(gameObject);
+        kill();
+    }
+    internal void kill()
+    {
+        if (!isDead)
+        {
+            isDead = true;
+            GameObject.Find("SoundPlayer").GetComponent<AudioSource>().clip = dieSound;
+            GameObject.Find("SoundPlayer").GetComponent<AudioSource>().volume = .4f;
+            GameObject.Find("SoundPlayer").GetComponent<AudioSource>().Play();
+            reload();
+        }
+    }
+
+    private void reload()
+    {
+        fader.fadeIn();
+        Invoke("reloadScene", 1f);
+        
+    }
+
+    private void reloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     void movePlayer(Vector2 direction)    {
@@ -136,8 +165,9 @@ public class PlayerController : MonoBehaviour
         if (canMove)
         {
             IEnumerator co = smoothTranslate(direction);
-            //GameObject.Find("SoundPlayer").GetComponent<AudioSource>().clip = moveSound;
-            //GameObject.Find("SoundPlayer").GetComponent<AudioSource>().Play();
+            GameObject.Find("SoundPlayer").GetComponent<AudioSource>().clip = moveSound;
+            GameObject.Find("SoundPlayer").GetComponent<AudioSource>().volume = .5f;
+            GameObject.Find("SoundPlayer").GetComponent<AudioSource>().Play();
             StartCoroutine(co);        
         }
 

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BlockingObject : MonoBehaviour
 {
-    bool isMoving;
     [Min(0.1f)]
     public float moveSpeed;
     public BoundaryChecker rightBoundaryChecker;
@@ -14,6 +13,8 @@ public class BlockingObject : MonoBehaviour
 
     public bool CanBeTraversed { get; set; }
     public bool CanBePushed { get; set; }
+    public bool isMoving;
+
     private void Awake()
     {
         isMoving = false; 

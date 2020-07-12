@@ -68,7 +68,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 913543009
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 5562995553935751023, guid: ae5efcf9cea1db34e8118d5c4ccd6fe1,
     type: 3}
@@ -150,7 +150,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 913543009
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -5110835738341581690, guid: ae5efcf9cea1db34e8118d5c4ccd6fe1,
     type: 3}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 9040239720574709315}
   m_Layer: 0
   m_Name: Lever
-  m_TagString: Untagged
+  m_TagString: Lever
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -210,6 +210,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c731d624c437b5408e4906ced4583fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 0
+  rightBoundaryChecker: {fileID: 0}
+  leftBoundaryChecker: {fileID: 0}
+  topBoundaryChecker: {fileID: 0}
+  bottomBoundaryChecker: {fileID: 0}
+  isMoving: 0
   status: 0
   connectedTo: {fileID: 0}
 --- !u!61 &9040239720574709315
