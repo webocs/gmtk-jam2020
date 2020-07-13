@@ -226,8 +226,13 @@ MonoBehaviour:
   placingColor: {r: 1, g: 1, b: 1, a: 1}
   connectingColor: {r: 0.05882353, g: 0.21960784, b: 0.05490196, a: 1}
   denySound: {fileID: 8300000, guid: c69a4696ab59bdf44a5b1034e6f45417, type: 3}
+  acceptSound: {fileID: 8300000, guid: a2dd06222dea1af40803ed1ddade73e3, type: 3}
+  changeSound: {fileID: 8300000, guid: 44a6ef96977ba994a8a713727f95575b, type: 3}
   MAX_RAM: 16
   currentRam: 0
+  changeRamCost: 0
+  customRamCost: 0
+  walls: {fileID: 0}
 --- !u!61 &7812738600205183808
 BoxCollider2D:
   m_ObjectHideFlags: 0

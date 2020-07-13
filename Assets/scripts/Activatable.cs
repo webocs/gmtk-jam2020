@@ -4,7 +4,7 @@ using UnityEngine;
 public abstract class Activatable : BlockingObject
 {
     protected bool playerCanActivate;
-    public Activatable connectedTo;
+    public Activatable connectedTo;    
 
     public abstract void activate(GameObject activator);
     public abstract void setStatus(GameObject activator, bool value);

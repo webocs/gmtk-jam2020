@@ -37,10 +37,11 @@ public class EnemyController : BlockingObject
         MIN_ATTACK_TIMER = Math.Max(MIN_MOVE_TIMER, MAX_MOVE_TIMER);
         MAX_ATTACK_TIMER = Math.Min(MIN_MOVE_TIMER, MAX_MOVE_TIMER);
         newMoveTimer = UnityEngine.Random.Range(MIN_MOVE_TIMER, MAX_MOVE_TIMER);
+        attackTimer = UnityEngine.Random.Range(MIN_ATTACK_TIMER, MAX_ATTACK_TIMER);
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (!isMoving  && attackTimer <0)
         {

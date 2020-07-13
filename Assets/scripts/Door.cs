@@ -40,7 +40,6 @@ public class Door : Activatable
     public override void activate(GameObject activator)
     {
         
-        Debug.Log(activator.name);
         if (playerCanActivate && activator.tag == "Player")
             toggle();
         else if (activator.tag != "Player")

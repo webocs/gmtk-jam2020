@@ -59,15 +59,15 @@ public class Glitch : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag != "Player" &&
-            collision.gameObject.tag != "walls" &&
-            collision.gameObject.tag != "glitch" &&
-            collision.gameObject.tag != "undestroyable" &&
-            collision.gameObject.tag != "boundChecker")
-        {
-            Destroy(collision.gameObject);
-        } else if (collision.gameObject.tag == "Player"){
-            collision.gameObject.GetComponent<PlayerController>().kill();
-        }
+        //if (collision.gameObject.tag != "Player" &&
+        //    collision.gameObject.tag != "walls" &&
+        //    collision.gameObject.tag != "glitch" &&
+        //    collision.gameObject.tag != "undestroyable" &&
+        //    collision.gameObject.tag != "boundChecker")
+        //{
+        //    Destroy(collision.gameObject);
+        //} else if (collision.gameObject.tag == "Player"){
+        //    collision.gameObject.GetComponent<PlayerController>().kill();
+        //}
     }
 }

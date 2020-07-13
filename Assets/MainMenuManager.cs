@@ -13,11 +13,11 @@ public class MainMenuManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return))
         {            
            fader.fadeIn();
-           Invoke("reloadScene", 2f);
+           Invoke("loadNextScene", 2f);
         }
     }
 
-    private void reloadScene()
+    private void loadNextScene()
     {
         SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex+1) % SceneManager.sceneCountInBuildSettings);
     }

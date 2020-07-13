@@ -30,13 +30,49 @@ public class PlayerController : MonoBehaviour
         fader = FindObjectOfType<Fader>();
         goingRight = true;
         animator = GetComponentInChildren<Animator>();
+        moveSpeed = Constants.MOVE_SPEED;
         oldMoveSpeed = -1;
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void FixedUpdate()
     {
         checkMovement();
+    }
+
+    private void Update()
+    {
+        checkInputs();
+    }
+
+    private void checkInputs()
+    {
+        if (!isMoving && !isDead)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (rightBoundaryChecker.collidingWith && rightBoundaryChecker.collidingWith.GetComponent<Activatable>() != null)
+                {
+                    rightBoundaryChecker.collidingWith.GetComponent<Activatable>().activate(gameObject);
+                }
+                if (leftBoundaryChecker.collidingWith && leftBoundaryChecker.collidingWith.GetComponent<Activatable>() != null)
+                {
+                    leftBoundaryChecker.collidingWith.GetComponent<Activatable>().activate(gameObject);
+                }
+                if (topBoundaryChecker.collidingWith && topBoundaryChecker.collidingWith.GetComponent<Activatable>() != null)
+                {
+                    topBoundaryChecker.collidingWith.GetComponent<Activatable>().activate(gameObject);
+                }
+                if (bottomBoundaryChecker.collidingWith && bottomBoundaryChecker.collidingWith.GetComponent<Activatable>() != null)
+                {
+                    bottomBoundaryChecker.collidingWith.GetComponent<Activatable>().activate(gameObject);
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                reload();
+            }
+        }
     }
 
     void checkMovement()
@@ -56,7 +92,6 @@ public class PlayerController : MonoBehaviour
                 movePlayer(Vector2.left);
                 if (goingRight)
                 {
-                    animator.SetTrigger("goLeft");
                     goingRight = false;
                 }
 
@@ -66,35 +101,13 @@ public class PlayerController : MonoBehaviour
                 movePlayer(Vector2.right);
                 if (!goingRight)
                 {
-                    animator.SetTrigger("goRight");
                     goingRight = true;
                 }
 
             } 
-            else if (Input.GetKeyDown(KeyCode.Space))
-            {
-               if(rightBoundaryChecker.collidingWith && rightBoundaryChecker.collidingWith.GetComponent<Activatable>()!=null)
-                {
-                    rightBoundaryChecker.collidingWith.GetComponent<Activatable>().activate(gameObject);
-                }
-                if(leftBoundaryChecker.collidingWith && leftBoundaryChecker.collidingWith.GetComponent<Activatable>()!=null)
-                {
-                    leftBoundaryChecker.collidingWith.GetComponent<Activatable>().activate(gameObject);
-                }
-                if(topBoundaryChecker.collidingWith && topBoundaryChecker.collidingWith.GetComponent<Activatable>()!=null)
-                {
-                    topBoundaryChecker.collidingWith.GetComponent<Activatable>().activate(gameObject);
-                }
-                if(bottomBoundaryChecker.collidingWith && bottomBoundaryChecker.collidingWith.GetComponent<Activatable>()!=null)
-                {
-                    bottomBoundaryChecker.collidingWith.GetComponent<Activatable>().activate(gameObject);
-                }
-            }
+          
         }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            reload();
-        }
+       
 
     }
 

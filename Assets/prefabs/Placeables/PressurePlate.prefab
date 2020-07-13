@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1153881091828689452}
   m_Layer: 0
   m_Name: PressurePlate
-  m_TagString: Untagged
+  m_TagString: pressurePlate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52,8 +52,14 @@ MonoBehaviour:
   topBoundaryChecker: {fileID: 0}
   bottomBoundaryChecker: {fileID: 0}
   isMoving: 0
-  status: 0
   connectedTo: {fileID: 0}
+  c1: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  c2: {r: 1, g: 0, b: 0, a: 1}
+  origin: {x: 0, y: 0, z: 0}
+  end: {fileID: 0}
+  offSetVector: {x: 0, y: 0, z: 0}
+  width: 0
+  status: 0
 --- !u!61 &1153881091828689452
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -147,8 +153,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 913543009
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 9069228089427178928, guid: 435d111b3d04e4d45880932cf534f915,
     type: 3}
@@ -229,8 +235,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 913543009
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 5652156558631736147, guid: 435d111b3d04e4d45880932cf534f915,
     type: 3}

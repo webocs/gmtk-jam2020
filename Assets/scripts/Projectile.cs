@@ -8,9 +8,13 @@ public class Projectile : MonoBehaviour
     public Vector2 direction;
     public float moveSpeed;
     public AudioClip destroySound;
-  
+
+    private void Awake()
+    {
+        moveSpeed = Constants.PROJECTILE_SPEED;
+    }
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         transform.position = transform.position + ( new Vector3(direction.x,direction.y,0) * moveSpeed);
     }
@@ -20,7 +24,7 @@ public class Projectile : MonoBehaviour
         if (collision.gameObject.tag != "boundChecker" && collision.gameObject.tag != "undestroyable")
         {
             GameObject.Find("SoundPlayer").GetComponent<AudioSource>().clip = destroySound;
-            GameObject.Find("SoundPlayer").GetComponent<AudioSource>().volume = .5f;
+            GameObject.Find("SoundPlayer").GetComponent<AudioSource>().volume = .2f;
             GameObject.Find("SoundPlayer").GetComponent<AudioSource>().Play();
             if (collision.gameObject.tag == "Player")
                 collision.gameObject.GetComponent<PlayerController>().hurt();

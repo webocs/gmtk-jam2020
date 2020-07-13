@@ -6,25 +6,65 @@ public class BoundaryChecker : MonoBehaviour
 {
     public bool IsColliding;
     public GameObject collidingWith;
+    List<GameObject> currentCollisions = new List<GameObject>();
 
+    private
+
+    void Start()
+    {      
+    }
     private void Awake()
     {
         IsColliding = false;
         collidingWith = null;
     }
-    private void OnCollisionStay2D(Collision2D collision)
+
+    //private void OnCollisionStay2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.tag != "boundChecker" && collision.gameObject.tag != "undestroyable")
+    //    {
+    //        IsColliding = true;
+    //        collidingWith = collision.gameObject;
+    //    }
+    //}
+
+    private void FixedUpdate()
     {
-        if (collision.gameObject.tag != "boundChecker" && collision.gameObject.tag != "undestroyable")
+        bool isCollidingWithSomething = false;
+        foreach (GameObject collision in currentCollisions)
         {
-            IsColliding = true;
-            collidingWith = collision.gameObject;
+            if (collision.gameObject)
+            {
+                if (collision.gameObject.tag != "boundChecker" && collision.gameObject.tag != "undestroyable")
+                {
+                    isCollidingWithSomething = true;
+                    IsColliding = true;
+                    collidingWith = collision.gameObject;
+                }
+            }
+        }
+        if (!isCollidingWithSomething)
+        {
+            IsColliding = false;
+            collidingWith = null;
+        }
+    }
+   
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Add the GameObject collided with to the list.
+        if (collision.gameObject.tag != "boundChecker" && collision.gameObject.tag != "undestroyable" && collision.gameObject.tag != "pressurePlate")
+        {
+            currentCollisions.Add(collision.gameObject);
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    void OnCollisionExit2D(Collision2D col)
     {
-        IsColliding = false;
-        collidingWith = null;
 
+        // Remove the GameObject collided with from the list.
+        currentCollisions.Remove(col.gameObject);
+      
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class CheatMasterPointer : MonoBehaviour
 {
@@ -34,16 +35,22 @@ public class CheatMasterPointer : MonoBehaviour
     public Color placingColor;
     public Color connectingColor;
     public AudioClip denySound;
+    public AudioClip acceptSound;
+    public AudioClip changeSound;
 
     // RAM system
     public float MAX_RAM;
     public float currentRam;
     RamMeter ramMeter;
+    public bool changeRamCost;
+    public float customRamCost;
+    public GameObject walls;
 
 
     // Start is called before the first frame update
     void Awake()
     {
+        moveSpeed = Constants.MOVE_SPEED;
         ramMeter = FindObjectOfType<RamMeter>();
         ramMeter.max = MAX_RAM;
         allActivables = new List<Activatable>();
@@ -61,13 +68,45 @@ public class CheatMasterPointer : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
+    {        
+        checkMovement();
+    }
+
+    private void Update()
     {
-        currentRam = placedObjects.Keys.Count * 0.95f;
+        ramMeter.max = MAX_RAM;
+        currentRam = placedObjects.Keys.Count * (changeRamCost? customRamCost : Constants.RAM_COST);
         currentRam = Math.Min(currentRam, MAX_RAM);
         ramMeter.current = currentRam;
         if (!inConnectMode) GetComponentInChildren<SpriteRenderer>().color = placingColor;
-        checkMovement();
+        checkInputs();
+    }
+
+    void checkInputs()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && !inConnectMode)
+        {
+            cycleSpawnable();
+        }
+        else if (Input.GetKeyDown(KeyCode.E) && !inConnectMode)
+        {
+            placeSpawnable();
+        }
+        else if (Input.GetKeyDown(KeyCode.F) && !inConnectMode)
+        {
+            startLine();
+        }
+        else if (Input.GetKeyDown(KeyCode.F) && inConnectMode)
+        {
+            connect();
+        }
+        if (!inConnectMode)
+            assignGhost();
+        else
+        {
+            spawnableGhost.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
+        }
     }
 
     private float yDistance()
@@ -129,34 +168,8 @@ public class CheatMasterPointer : MonoBehaviour
                 }
 
             }
-            else if (Input.GetKeyDown(KeyCode.Space) && !inConnectMode)
-            {
-                cycleSpawnable();
-            } 
-            else if (Input.GetKeyDown(KeyCode.E) && !inConnectMode)
-            {
-                placeSpawnable();
-            }            
-            else if (Input.GetKeyDown(KeyCode.F) && !inConnectMode)
-            {
-                startLine();
-            }
-            else if (Input.GetKeyDown(KeyCode.F) && inConnectMode)
-            {
-                connect();
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            // gameManager.restart();
-        }
-        if (!inConnectMode)
-            assignGhost();
-        else {
-            spawnableGhost.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
-        }
-
-
+          
+        }     
     }
 
    
@@ -170,6 +183,9 @@ public class CheatMasterPointer : MonoBehaviour
                 GameObject g = Instantiate(spawnables[currentSpawnable], transform.position, Quaternion.identity);
                 placedObjects[transform.position] = g;
                 allActivables.Add(g.GetComponent<Activatable>());
+                Tilemap tilemap = walls.GetComponent<Tilemap>();
+                Vector3Int tile = tilemap.WorldToCell(transform.position);
+                tilemap.SetTile(tile, null);
             }
             //else //Cannot undo
             //{
@@ -185,10 +201,11 @@ public class CheatMasterPointer : MonoBehaviour
     private void generateRandomEvent()
     {
         int randomEventChance = UnityEngine.Random.Range(0, 100);
-        if (randomEventChance >= 5)
+        if (randomEventChance >= 25)
         {
             Activatable a = allActivables[UnityEngine.Random.Range(0, allActivables.Count)];
-            a.activate(gameObject);
+            if(a)
+                a.activate(gameObject);
         }
         else {
             int x = UnityEngine.Random.Range(0,UPPER_BOUNDARY);
@@ -208,7 +225,10 @@ public class CheatMasterPointer : MonoBehaviour
 
     private void cycleSpawnable()
     {
-        currentSpawnable = (currentSpawnable +1)%spawnables.Length;        
+        currentSpawnable = (currentSpawnable + 1) % spawnables.Length;
+        GameObject.Find("SoundPlayer").GetComponent<AudioSource>().clip = changeSound;
+        GameObject.Find("SoundPlayer").GetComponent<AudioSource>().volume = .8f;
+        GameObject.Find("SoundPlayer").GetComponent<AudioSource>().Play();
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -247,8 +267,13 @@ public class CheatMasterPointer : MonoBehaviour
         if (standingOver)
         {
             inConnectMode = false;
-            if( standingOver != connectionOrigin)
+            if (standingOver != connectionOrigin)
+            {
                 connectionOrigin.connectedTo = standingOver;
+                GameObject.Find("SoundPlayer").GetComponent<AudioSource>().clip = acceptSound;
+                GameObject.Find("SoundPlayer").GetComponent<AudioSource>().volume = .8f;
+                GameObject.Find("SoundPlayer").GetComponent<AudioSource>().Play();
+            }
             else
             {
                 cantConnect();
